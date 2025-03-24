@@ -1,0 +1,21 @@
+tensorflow==2.16.1
+pandas 
+dvc
+mlflow==2.2.2
+notebook
+numpy
+matplotlib
+seaborn
+python-box==6.0.2
+pyYAML
+tqdm
+ensure==1.0.2
+joblib
+types-PyYAML
+scipy
+Flask
+Flask-Cors
+gdown
+#cmake
+#pyarrow
+-e . #To install all the folders as local packages. To install all the folders as local packages it fill find the constructor __init__.py. This is done using setup.py
