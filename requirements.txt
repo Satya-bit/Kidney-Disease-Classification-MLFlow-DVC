@@ -1,4 +1,4 @@
-tensorflow==2.16.1
+tensorflow==2.19.0
 pandas 
 dvc
 mlflow
@@ -16,7 +16,8 @@ scipy
 Flask
 Flask-Cors
 gdown
-#cmake
-#pyarrow
-#setuptools
+dagshub
+cmake
+pyarrow
+setuptools
 -e . #To install all the folders as local packages. To install all the folders as local packages it fill find the constructor __init__.py. This is done using setup.py

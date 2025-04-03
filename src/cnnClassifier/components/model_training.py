@@ -4,7 +4,7 @@ from zipfile import ZipFile
 import tensorflow as tf
 import time
 tf.config.run_functions_eagerly(True)  # Force eager execution globally
-
+import math
 from src.cnnClassifier.entity.config_entity import TrainingConfig
 from pathlib import Path
 class Training:
@@ -79,8 +79,8 @@ class Training:
 
     
     def train(self): #Function to train the model
-        self.steps_per_epoch = self.train_generator.samples // self.train_generator.batch_size #This is number of iteration per epoch. The number of times the model parameters will be updated per epoch.
-        self.validation_steps = self.valid_generator.samples // self.valid_generator.batch_size #After every iteration the model will be validated. 
+        self.steps_per_epoch = math.ceil(self.train_generator.samples / self.train_generator.batch_size) #This is number of iteration per epoch. The number of times the model parameters will be updated per epoch.
+        self.validation_steps = math.ceil(self.valid_generator.samples / self.valid_generator.batch_size) #After every iteration the model will be validated. 
         #For example if the validation has 100 samples and the batch size is 10 the evaluation will be done for 100/10=10 samples. A record of correct samples is kept. in these 10 samples. then afterwards its added together in the end.
 
         self.model.fit(
