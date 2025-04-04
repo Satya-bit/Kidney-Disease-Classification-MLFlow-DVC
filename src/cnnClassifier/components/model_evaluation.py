@@ -7,8 +7,9 @@ from urllib.parse import urlparse
 from src.cnnClassifier.utils.common import read_yaml, create_directories, save_json
 from src.cnnClassifier.entity.config_entity import EvaluationConfig
 from tensorflow.keras.applications.vgg16 import preprocess_input
+import mlflow
 
-
+import dagshub
 
 class Evaluation:
     def __init__(self, config: EvaluationConfig):
@@ -57,6 +58,12 @@ class Evaluation:
 
     
     def log_into_mlflow(self):
+        dagshub.init(repo_owner='Satya-bit', repo_name='Kidney-Disease-Classification-MLFlow-DVC', mlflow=True)
+
+        with mlflow.start_run():
+            mlflow.log_param('parameter name', 'value')
+            mlflow.log_metric('metric name', 1)
+
         mlflow.set_registry_uri(self.config.mlflow_uri)
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
         

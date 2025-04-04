@@ -1,3 +1,4 @@
+# NOTE- To connect with MLFLOW run the code in research/model_evalutaion.ipynb one cell
 #This is run file
 from src.cnnClassifier.logging.logs import logger
 from src.cnnClassifier.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
