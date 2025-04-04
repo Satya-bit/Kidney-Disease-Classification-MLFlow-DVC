@@ -2,9 +2,18 @@ artifacts_root: artifacts
 
 data_ingestion:
   root_dir: artifacts/data_ingestion
-  source_URL: https://drive.google.com/file/d/1_K7AfIg4ynhyhrggex0QMBM3M6yjJS3C/view?usp=sharing
+  source_URL: https://drive.google.com/file/d/1bTlU4WJKB_x4SEyw7HJjWpkPQ2yUxoFs/view?usp=sharing
   local_data_file: artifacts/data_ingestion/data.zip
   unzip_dir: artifacts/data_ingestion
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  split: artifacts/data_transformation/split
+  
+ 
+
+# data_split:
+#   root_dir: artifacts/data_split
 
 prepare_base_model:
   root_dir: artifacts/prepare_base_model

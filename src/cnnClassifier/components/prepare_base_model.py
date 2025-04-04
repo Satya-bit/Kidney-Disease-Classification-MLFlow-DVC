@@ -34,10 +34,20 @@ class PrepareBaseModel:
                 model.trainable = False
 
         flatten_in = tf.keras.layers.Flatten()(model.output)
+        
+        fc1=tf.keras.layers.Dense(
+            1024,
+            activation='relu'
+        )(flatten_in)
+        
+        fc2=tf.keras.layers.Dense(
+            512,
+            activation='relu'
+        )(fc1)
         prediction = tf.keras.layers.Dense(
             units=classes,
             activation="softmax"
-        )(flatten_in) #(flatten_in)This acts as an input to the final layer. This acts like sequential
+        )(fc2) #(flatten_in)This acts as an input to the final layer. This acts like sequential
 
         full_model = tf.keras.models.Model(
             inputs=model.input,

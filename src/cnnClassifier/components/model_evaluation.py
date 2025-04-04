@@ -6,6 +6,7 @@ from urllib.parse import urlparse
 
 from src.cnnClassifier.utils.common import read_yaml, create_directories, save_json
 from src.cnnClassifier.entity.config_entity import EvaluationConfig
+from tensorflow.keras.applications.vgg16 import preprocess_input
 
 
 
@@ -17,8 +18,9 @@ class Evaluation:
     def _valid_generator(self):
 
         datagenerator_kwargs = dict(
-            rescale = 1./255,
-            validation_split=0.20
+            preprocessing_function=preprocess_input,
+            # rescale = 1./255,
+            # validation_split=0.20
         )
 
         dataflow_kwargs = dict(
@@ -32,8 +34,7 @@ class Evaluation:
         )
 
         self.valid_generator = valid_datagenerator.flow_from_directory(
-            directory=self.config.training_data,
-            subset="validation",
+            directory=self.config.validation_data,
             shuffle=False,
             **dataflow_kwargs
         )

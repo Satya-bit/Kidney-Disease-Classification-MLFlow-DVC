@@ -4,7 +4,7 @@ from src.cnnClassifier.constants import *  #IMPORTING THE TWO CONSTANTS PATH OF 
 
 from src.cnnClassifier.utils.common import read_yaml, create_directories #Importing from utils the common functions like read_yaml and creat_directories.
 from cnnClassifier.utils.common import read_yaml, create_directories, save_json
-from src.cnnClassifier.entity.config_entity import DataIngestionConfig, PrepareBaseModelConfig, TrainingConfig, EvaluationConfig
+from src.cnnClassifier.entity.config_entity import DataIngestionConfig, DataTransformationConfig, PrepareBaseModelConfig, TrainingConfig, EvaluationConfig
 import os
 class ConfigurationManager:
     def __init__(
@@ -33,6 +33,25 @@ class ConfigurationManager:
             unzip_dir=config.unzip_dir 
         )
         return data_ingestion_config
+    
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        data_transformation = self.config.data_transformation
+        data_ingestion = self.config.data_ingestion  # Get data ingestion config
+        params=self.params
+        
+        data = os.path.join(data_ingestion.unzip_dir, "KT_SCAN")
+        
+        create_directories([Path(data_transformation.root_dir)])
+
+        data_transformation_config = DataTransformationConfig(
+            root_dir=Path(data_transformation.root_dir),
+            data=Path(data),
+            split=Path(data_transformation.split),
+            train=params.TRAIN,
+            test=params.TEST
+        )
+        
+        return data_transformation_config
 
 
     def get_prepare_base_model_config(self) -> PrepareBaseModelConfig:
@@ -58,7 +77,8 @@ class ConfigurationManager:
             training = self.config.training
             prepare_base_model = self.config.prepare_base_model
             params = self.params
-            training_data =os.path.join(self.config.data_ingestion.unzip_dir, "dataset")
+            training_data =os.path.join(self.config.data_transformation.split, "train")
+            validation_data =os.path.join(self.config.data_transformation.split, "test")
             create_directories([
                 Path(training.root_dir)
             ])
@@ -68,11 +88,14 @@ class ConfigurationManager:
                 updated_base_model_path=Path(prepare_base_model.updated_base_model_path),
                 # base_model_path=Path(prepare_base_model.base_model_path),
                 training_data=Path(training_data),
+                validation_data=Path(validation_data),
                 params_epochs=params.EPOCHS,
                 params_batch_size=params.BATCH_SIZE,
                 params_is_augmentation=params.AUGMENTATION,
                 params_image_size=params.IMAGE_SIZE,
-                params_learning_rate=params.LEARNING_RATE
+                params_learning_rate=params.LEARNING_RATE,
+                params_monitor=params.MONITOR,
+                params_patience=params.PATIENCE
             )
 
             return training_config
@@ -80,7 +103,7 @@ class ConfigurationManager:
     def get_evaluation_config(self) -> EvaluationConfig:
         eval_config = EvaluationConfig(
             path_of_model="artifacts/training/model.h5",
-            training_data="artifacts/data_ingestion/dataset",
+            validation_data="artifacts/data_transformation/split/test",
             mlflow_uri="https://dagshub.com/Satya-bit/Kidney-Disease-Classification-MLFlow-DVC.mlflow",
             all_params=self.params,
             params_image_size=self.params.IMAGE_SIZE,

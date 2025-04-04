@@ -6,3 +6,9 @@ EPOCHS: 1
 CLASSES: 2
 WEIGHTS: imagenet
 LEARNING_RATE: 0.01
+
+TRAIN: 0.8
+TEST: 0.2
+
+MONITOR: val_accuracy
+PATIENCE: 6
