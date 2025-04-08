@@ -24,4 +24,5 @@ opencv-python
 python_splitter
 numpy==1.26.4
 imgaug
+pymongo
 -e . #To install all the folders as local packages. To install all the folders as local packages it fill find the constructor __init__.py. This is done using setup.py
