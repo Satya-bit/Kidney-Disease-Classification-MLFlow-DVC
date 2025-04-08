@@ -28,6 +28,9 @@ Achieved almost 99% recall. Trained for 30 epochs with early stopping of 6 and b
 
 ![image](https://github.com/user-attachments/assets/af9ad734-4e27-45ac-9081-1a03c8126fe2)
 
+![image](https://github.com/user-attachments/assets/163b5104-5c47-4c56-927d-6e7a583a44f6)
+
+
 **Techstacks**
 
 ![image](https://github.com/user-attachments/assets/dbba3ad3-e7ed-4790-b8cf-e4aeb5143170)
