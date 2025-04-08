@@ -50,8 +50,7 @@ Achieved almost 99% recall. Trained for 30 epochs with early stopping of 6 and b
 
 ![image](https://github.com/user-attachments/assets/db02a2ce-b146-4609-91c3-6a3135c3fb81)
 
-**Frontend And Results Note- This is just a prototype to get idea about my approach. Actual implementation was bit different in production in terms of frontend.**
-
+# Frontend And Results Note- This is just a prototype to get idea about my approach. Actual implementation was bit different in production in terms of frontend.
 
 ![image](https://github.com/user-attachments/assets/171093a7-cc23-4f61-8500-436f023d0353)
 
