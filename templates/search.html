@@ -19,16 +19,16 @@
         
         .search-container form {
             display: flex;
-            flex-wrap: wrap; /* Allow wrapping on small screens */
-            justify-content: center; /* Center form contents */
+            flex-wrap: nowrap; /* Change from wrap to nowrap */
+            justify-content: center;
             gap: 10px;
-            max-width: 600px;
+            max-width: 800px; /* Increased from 600px to accommodate all three items */
             width: 100%;
         }
         
         .search-container .search-bar {
-            flex: 1 1 200px; /* Grow, shrink, with minimum 200px width */
-            min-width: 200px; /* Ensure inputs don't get too small */
+            flex: 1; /* Simplified from flex: 1 1 200px */
+            min-width: 200px;
             padding: 15px;
             border: 2px solid #1b2d6b;
             border-radius: 30px;
@@ -37,7 +37,7 @@
         }
         
         .Search {
-            width: 150px;
+            width: 100px;
             height: 50px;
             background-color: #363e75;
             color: #fff;
@@ -101,6 +101,21 @@
             transform: scale(1.02); /* Slight scale increase for "pop" effect */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
         }
+        .delete-btn {
+            width: 120px;
+            height: 40px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
     </style>
 </head>
 <body>
@@ -130,12 +145,16 @@
                         {% if patient.image_data %}
                         <img class="patient-image" src="data:image/jpeg;base64,{{ patient.image_data }}" alt="Patient Image">
                         {% endif %}
+                        <form action="/delete/{{ patient._id }}" method="POST" style="margin-top: 15px;">
+                            <button type="submit" class="delete-btn">Delete Record</button>
+                        </form>
                     </div>
                     {% endfor %}
                 {% elif request.method == 'POST' %}
                     <p class="no-results">No patients found matching your criteria</p>
                 {% endif %}
             </div>
+
             <div>
                 <a href="/" class="Back">Back</a>
             </div>

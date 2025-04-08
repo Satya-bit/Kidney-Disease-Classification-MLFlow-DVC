@@ -11,6 +11,7 @@ import json
 from werkzeug.utils import secure_filename
 import base64
 import datetime
+from flask import redirect, url_for
 
 client = MongoClient("mongodb://localhost:27017")
 mydb = client["Kidney_tumor"]
@@ -51,10 +52,17 @@ def search():
         if lname:
             query['lname'] = {'$regex': lname, '$options': 'i'}
         
-        patients = list(collection.find(query, {'_id': 0}))
-        return render_template('search.html', patients=patients)
+        patients = list(collection.find(query))
+        return render_template('search.html', patients=patients) #left side patients is variable name for Jinja 2 HTML and right side patients is variable name for Python where mongo db data is found.
     
     return render_template('search.html')
+@app.route("/delete/<string:patient_id>", methods=['POST'])
+@cross_origin()
+def delete_patient(patient_id):
+    # Convert string ID to MongoDB ObjectId
+    from bson.objectid import ObjectId
+    collection.delete_one({'_id': ObjectId(patient_id)})
+    return redirect(url_for('search'))  # Redirect back to search page
 
 
 @app.route("/create", methods=['POST'])
