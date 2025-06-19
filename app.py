@@ -71,10 +71,10 @@ def create():
     # Get form data with default "No record" for empty fields
     fname = request.form.get('fname', 'No record').strip() or 'No record'
     lname = request.form.get('lname', 'No record').strip() or 'No record'
-    age = request.form.get('age', 'No record')
+    age = request.form.get('age', 'No record').strip()
     gender = request.form.get('gender', 'No record').strip() or 'No record'
     contact = request.form.get('contact', 'No record').strip() or 'No record'
-    weight = request.form.get('weight', 'No record')
+    weight = request.form.get('weight', 'No record').strip() 
     symptoms = request.form.get('symptoms', 'No record').strip() or 'No record'
     diagnosis = request.form.get('diagnosis', 'No record').strip() or 'No record'
     classification = request.form.get('classification', 'No record').strip() or 'No record'
