@@ -1,5 +1,5 @@
 # Kidney-Disease-Classification-MLFlow-DVC
-This project aims in predicting Kidney Diseases achieving 98% recall. 
+This project aims in predicting Kidney Diseases achieving 83% recall. This is just a demonstration. In production, the code and data was different.
 
 **About Data**
 
